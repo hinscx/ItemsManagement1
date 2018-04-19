@@ -1,7 +1,7 @@
 package com.hins.sm.servlet;
 
-import com.hins.sm.service.StaffService;
-import com.hins.sm.domain.Staff;
+import com.hins.sm.service.itemService;
+import com.hins.sm.domain.item;
 import com.hins.sm.domain.PageBean;
 import com.hins.sm.utils.CommonUtils;
 
@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 
-@WebServlet(name="StaffServlet", urlPatterns="/StaffServlet")
-public class StaffServlet extends BaseServlet {
+@WebServlet(name="itemServlet", urlPatterns="/itemServlet")
+public class itemServlet extends BaseServlet {
 
-    private StaffService staffService = new StaffService();
+    private itemService itemService = new itemService();
 
     /**
      * 处理"显示所有人员"的请求
@@ -33,7 +33,7 @@ public class StaffServlet extends BaseServlet {
 
         int pr = 10;
 
-        PageBean<Staff> pb = staffService.findAll(pc, pr);
+        PageBean<item> pb = itemService.findAll(pc, pr);
         pb.setUrl(getUrl(request));
 
         request.setAttribute("pb", pb);
@@ -79,20 +79,20 @@ public class StaffServlet extends BaseServlet {
     public String preEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String id = request.getParameter("id");
-        Staff staff = staffService.find(id);
+        item item = itemService.find(id);
 
-        request.setAttribute("staff", staff);
+        request.setAttribute("item", item);
 
         return "/jsp/edit.jsp";
     }
 
     public String edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Staff staff = CommonUtils.toBean(request.getParameterMap(), Staff.class);
+        item item = CommonUtils.toBean(request.getParameterMap(), item.class);
 
-        staffService.edit(staff);
+        itemService.edit(item);
 
-        request.setAttribute("msg", "恭喜，编辑员工成功");
+        request.setAttribute("msg", "恭喜，编辑商品成功");
         return "/jsp/msg.jsp";
     }
 
@@ -100,35 +100,35 @@ public class StaffServlet extends BaseServlet {
 
         String id = request.getParameter("id");
 
-        staffService.delete(id);
+        itemService.delete(id);
 
-        request.setAttribute("msg", "恭喜，删除员工成功");
+        request.setAttribute("msg", "恭喜，删除商品成功");
 
         return "/jsp/msg.jsp";
     }
     
     public String add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Staff staff = CommonUtils.toBean(request.getParameterMap(), Staff.class);
+        item item = CommonUtils.toBean(request.getParameterMap(), item.class);
 
 
-        staffService.add(staff);
+        itemService.add(item);
 
-        request.setAttribute("msg", "恭喜，成功添加员工");
+        request.setAttribute("msg", "恭喜，成功添加商品");
 
         return "/jsp/msg.jsp";
     }
 
     public String query(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Staff staff = CommonUtils.toBean(request.getParameterMap(), Staff.class);
+        item item = CommonUtils.toBean(request.getParameterMap(), item.class);
 
-        //staff = encoding(staff);
+        //item = encoding(item);
 
         int pc = getPc(request);
         int pr = 10;
 
-        PageBean<Staff> pb = staffService.query(staff, pc, pr);
+        PageBean<item> pb = itemService.query(item, pc, pr);
 
         pb.setUrl(getUrl(request));
 
@@ -137,29 +137,29 @@ public class StaffServlet extends BaseServlet {
 
     }
 
-//    private Staff encoding(Staff staff) throws UnsupportedEncodingException {
+//    private Item encoding(Item item) throws UnsupportedEncodingException {
 //
-//        String name = staff.getName();
-//        String gender = staff.getGender();
-//        String phone = staff.getPhone();
-//        String email = staff.getEmail();
+//        String name = item.getName();
+//        String gender = item.getGender();
+//        String phone = item.getPhone();
+//        String email = item.getEmail();
 //
 //        if (name != null && !name.trim().isEmpty()) {
 //            name = new String(name.getBytes("ISO-8859-1"), "utf-8");
-//            staff.setName(name);
+//            item.setName(name);
 //        }
 //        if (gender != null && !gender.trim().isEmpty()) {
 //            gender = new String(gender.getBytes("ISO-8859-1"), "utf-8");
-//            staff.setGender(gender);
+//            item.setGender(gender);
 //        }
 //        if (phone != null && !phone.trim().isEmpty()) {
 //            phone = new String(phone.getBytes("ISO-8859-1"), "utf-8");
-//            staff.setPhone(phone);
+//            item.setPhone(phone);
 //        }
 //        if (email != null && !email.trim().isEmpty()) {
 //            email = new String(email.getBytes("ISO-8859-1"), "utf-8");
-//            staff.setEmail(email);
+//            item.setEmail(email);
 //        }
-//        return staff;
+//        return item;
 //    }
 }

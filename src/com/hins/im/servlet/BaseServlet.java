@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 
 /**
  * 重写了HttpServlet的service()方法
- * 用做StaffServlet的父类
+ * 用做ItemServlet的父类
  * 重写后的service()中利用反射实现了根据不同的请求调用不同的处理方法
  */
 public class BaseServlet extends HttpServlet {

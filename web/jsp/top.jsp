@@ -14,10 +14,10 @@
 </head>
 <body style="text-align: center;">
 
-<h1>Staff Management System</h1>
+<h1>Item Management System</h1>
 <nav>
-<a href="<c:url value='/jsp/add.jsp'/>">添加人员</a>
-<a href="<c:url value='/StaffServlet?method=findAll'/>">显示所有人员</a>
+<a href="<c:url value='/jsp/add.jsp'/>">添加商品</a>
+<a href="<c:url value='/ItemServlet?method=findAll'/>">显示所有商品</a>
 <a href="<c:url value='/jsp/query.jsp'/>">高级搜索</a>
 </nav>
 </body>

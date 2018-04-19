@@ -12,12 +12,12 @@
     <title>Title</title>
 </head>
 <body>
-<h3 align="center">添加员工</h3>
-<form action="<c:url value='/StaffServlet'/>" method="post">
+<h3 align="center">添加商品</h3>
+<form action="<c:url value='/ItemServlet'/>" method="post">
     <input type="hidden" name="method" value="add">
     <table border="0" align="center" width="40%" style="margin-left: 100px">
         <tr>
-            <td width="100px">员工名称</td>
+            <td width="100px">商品名称</td>
             <td width="40%">
                 <input type="text" name="name"/>
             </td>
@@ -26,7 +26,7 @@
             </td>
         </tr>
         <tr>
-            <td>员工性别</td>
+            <td>商品性别</td>
             <td>
                 <input type="radio" name="gender" value="male" id="male"/>
                 <label for="male">男</label>

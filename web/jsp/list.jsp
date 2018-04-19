@@ -23,7 +23,7 @@
             <th>描述</th>
             <th>操作</th>
         </tr>
-    <c:forEach items="${ pb.staffList }" var="sta">
+    <c:forEach items="${ pb.itemList }" var="sta">
         <tr>
             <td>${sta.name}</td>
             <td>${sta.gender}</td>
@@ -31,8 +31,8 @@
             <td>${sta.email}</td>
             <td>${sta.description}</td>
             <td>
-                <a href="<c:url value='/StaffServlet?method=preEdit&id=${sta.id}'/> ">编辑</a>
-                <a href="<c:url value='/StaffServlet?method=delete&id=${sta.id}'/> ">删除</a>
+                <a href="<c:url value='/ItemServlet?method=preEdit&id=${sta.id}'/> ">编辑</a>
+                <a href="<c:url value='/ItemServlet?method=delete&id=${sta.id}'/> ">删除</a>
             </td>
         </tr>
     </c:forEach>

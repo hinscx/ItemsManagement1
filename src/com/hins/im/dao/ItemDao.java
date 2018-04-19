@@ -1,6 +1,6 @@
 package com.hins.sm.dao;
 
-import com.hins.sm.domain.Staff;
+import com.hins.sm.domain.Item;
 import com.hins.sm.utils.JDBCUtils;
 import com.hins.sm.domain.PageBean;
 
@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StaffDao {
+public class ItemDao {
 
         private QueryRunner qr= JDBCUtils.getQueryRunner();
 
-        public List<Staff> findAll()
+        public List<Item> findAll()
         {
             try{
-                String sql="select * from staffs";
-                return qr.query(sql,new BeanListHandler<>(Staff.class));
+                String sql="select * from items";
+                return qr.query(sql,new BeanListHandler<>(Item.class));
             }catch (Exception e)
             {
                 throw new RuntimeException(e);
@@ -29,24 +29,24 @@ public class StaffDao {
         }
 
 
-        public PageBean<Staff> findAll(int pc, int pr) {
+        public PageBean<Item> findAll(int pc, int pr) {
             try{
 
-                PageBean<Staff> pb=new PageBean<>();
+                PageBean<Item> pb=new PageBean<>();
                 pb.setPc(pc);
                 pb.setPr(pr);
 
-                String sql = "select count(*) from staffs";
+                String sql = "select count(*) from items";
                 Number number = qr.query(sql,new ScalarHandler<>());
 
                 int tr=number.intValue();
                 pb.setTr(tr);
 
-                sql="select * from staffs order by name limit ?,?";
+                sql="select * from items order by name limit ?,?";
                 Object[] params={(pc-1)*pr,pr};
-                List<Staff> beanList=qr.query(sql,new BeanListHandler<>(Staff.class),params);
+                List<Item> beanList=qr.query(sql,new BeanListHandler<>(Item.class),params);
 
-                pb.setStaffList(beanList);
+                pb.setItemList(beanList);
 
                 return pb;
             }catch (Exception e)
@@ -55,10 +55,10 @@ public class StaffDao {
             }
         }
 
-        public void add(Staff s)
+        public void add(Item s)
         {
             try {
-                String sql = "insert into staffs (name, gender, phone, email, description) " +
+                String sql = "insert into items (name, gender, phone, email, description) " +
                         "values(?,?,?,?,?)";
                 Object[] params = {s.getName(), s.getGender(),
                         s.getPhone(), s.getEmail(), s.getDescription()};
@@ -70,22 +70,22 @@ public class StaffDao {
             }
         }
 
-    public Staff find(String id)
+    public Item find(String id)
     {
         try {
-            String sql = "select * from staffs where id=?";
-            return qr.query(sql, new BeanHandler<Staff>(Staff.class), id);
+            String sql = "select * from items where id=?";
+            return qr.query(sql, new BeanHandler<Item>(Item.class), id);
         }catch (Exception e)
         {
             throw new RuntimeException(e);
         }
     }
 
-    public void edit(Staff staff)
+    public void edit(Item item)
     {
         try{
-            String sql="update staffs set name=?,gender=?,phone=?,email=?,description=? where id=?";
-            Object[] params={staff.getName(),staff.getGender(),staff.getPhone(),staff.getEmail(),staff.getDescription(),staff.getId()};
+            String sql="update items set name=?,gender=?,phone=?,email=?,description=? where id=?";
+            Object[] params={item.getName(),item.getGender(),item.getPhone(),item.getEmail(),item.getDescription(),item.getId()};
 
             qr.update(sql,params);
         }catch (Exception e)
@@ -97,7 +97,7 @@ public class StaffDao {
     public void delete(String id)
     {
         try {
-            String sql = "delete from staffs where id=?";
+            String sql = "delete from items where id=?";
 
             qr.update(sql, id);
         }catch (Exception e)
@@ -109,36 +109,36 @@ public class StaffDao {
 
 //    }
 
-    public PageBean<Staff> query(Staff staff,int pc,int pr) {
+    public PageBean<Item> query(Item item,int pc,int pr) {
 
         try {
-            PageBean<Staff> pb = new PageBean<>();
+            PageBean<Item> pb = new PageBean<>();
             pb.setPc(pc);
             pb.setPr(pr);
 
-            StringBuilder cntSql = new StringBuilder("select count(*) from staffs ");
+            StringBuilder cntSql = new StringBuilder("select count(*) from items ");
             StringBuilder whereSql = new StringBuilder(" where 1=1 ");
             List<Object> params = new ArrayList<>();
 
-            String name = staff.getName();
+            String name = item.getName();
             if (name != null && !name.trim().isEmpty()) {
                 whereSql.append("and name like ?");
                 params.add("%" + name + "%");
             }
 
-            String gender = staff.getGender();
+            String gender = item.getGender();
             if (gender != null && !gender.trim().isEmpty()) {
                 whereSql.append("and gender=?");
                 params.add(gender);
             }
 
-            String phone = staff.getPhone();
+            String phone = item.getPhone();
             if (phone != null && !phone.trim().isEmpty()) {
                 whereSql.append("and phone like ?");
                 params.add("%" + phone + "%");
             }
 
-            String email = staff.getEmail();
+            String email = item.getEmail();
             if (email != null && !email.trim().isEmpty()) {
                 whereSql.append("and email like ?");
                 params.add("%" + email + "%");
@@ -149,14 +149,14 @@ public class StaffDao {
             int tr = num.intValue();
             pb.setTr(tr);
 
-            StringBuilder sql = new StringBuilder("select * from staffs ");
+            StringBuilder sql = new StringBuilder("select * from items ");
             StringBuilder lmitSql = new StringBuilder(" limit ?,?");
 
             params.add((pc - 1) * pr);
             params.add(pr);
 
-            List<Staff> beanList = qr.query(sql.append(whereSql).append(lmitSql).toString(), new BeanListHandler<Staff>(Staff.class), params.toArray());
-            pb.setStaffList(beanList);
+            List<Item> beanList = qr.query(sql.append(whereSql).append(lmitSql).toString(), new BeanListHandler<Item>(Item.class), params.toArray());
+            pb.setItemList(beanList);
 
             return pb;
         } catch (Exception e) {

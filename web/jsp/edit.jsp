@@ -13,14 +13,14 @@
 </head>
 <body>
 <h3 align="center">编辑员工</h3>
-<form action="<c:url value='/StaffServlet'/>" method="post" >
+<form action="<c:url value='/ItemServlet'/>" method="post" >
     <input type="hidden" name="method" value="edit"/>
-    <input type="hidden" name="id" value="${staff.id}"/>
+    <input type="hidden" name="id" value="${item.id}"/>
     <table border="0" align="center" width="40%" style="margin-left: 100px">
         <tr>
             <td width="100px">员工名称</td>
             <td width="40%">
-                <input type="text" name="name" value="${staff.name}"/>
+                <input type="text" name="name" value="${item.name}"/>
             </td>
             <td align="left">
                 <label id="nameError" class="error">&nbsp;</label>
@@ -29,9 +29,9 @@
         <tr>
             <td>员工性别</td>
             <td>
-                <input type="radio" name="gender" value="男" id="male" <c:if test="${staff.gender =='男'}">checked="checked"</c:if>>
+                <input type="radio" name="gender" value="男" id="male" <c:if test="${item.gender =='男'}">checked="checked"</c:if>>
                 <label for="male">男</label>
-                <input type="radio" name="gender" value="女" id="female" <c:if test="${staff.gender == '女'}">checked="checked"</c:if>>
+                <input type="radio" name="gender" value="女" id="female" <c:if test="${item.gender == '女'}">checked="checked"</c:if>>
                 <label for="female">女</label>
             </td>
             <td>
@@ -41,7 +41,7 @@
         <tr>
             <td>手机</td>
             <td>
-                <input type="text" name="phone" id="phone" value="${staff.phone}"/>
+                <input type="text" name="phone" id="phone" value="${item.phone}"/>
             </td>
             <td>
                 <label id="phoneError"class="error">&nbsp;</label>
@@ -50,7 +50,7 @@
         <tr>
             <td>邮箱</td>
             <td>
-                <input type="text" name="email" id="email" value="${staff.email}"/>
+                <input type="text" name="email" id="email" value="${item.email}"/>
             </td>
             <td>
                 <label id="emailError"class="error">&nbsp;</label>
@@ -59,7 +59,7 @@
         <tr>
             <td>描述</td>
             <td>
-                <textarea rows="5" cols="30" name="description">${staff.description}</textarea>
+                <textarea rows="5" cols="30" name="description">${item.description}</textarea>
             </td>
             <td>
                 <label id="discriptionError"class="error">&nbsp;</label>

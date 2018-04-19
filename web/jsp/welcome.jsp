@@ -14,6 +14,6 @@
 <b/>
 <b/>
 <b/>
-<p style="text-align: center;">Welcome to hins's StaffManagementSystem!</p>
+<p style="text-align: center;">Welcome to hins's ItemManagementSystem!</p>
 </body>
 </html>
